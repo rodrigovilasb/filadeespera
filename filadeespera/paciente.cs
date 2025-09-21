@@ -13,51 +13,12 @@ namespace filadeespera
         public string cpf;
         public int idade;
         public bool preferencial;
-
-        public void Menu()
-        {
-            Console.WriteLine("Menu:");
-            Console.WriteLine("1 - Adicionar paciente");
-            Console.WriteLine("2 - Listar pacientes");
-            Console.WriteLine("3 - Atender pacientes");
-            Console.WriteLine("4 - Alterar dados do paciente");
-            Console.WriteLine("q - Sair");
-            Console.Write("Escolha uma opção: ");
-            string opcao = Console.ReadLine();
-            switch (opcao)
-            {
-                case "1":
-                    AdicionarPaciente();
-                    break;
-                case "2":
-                    ListarPaciente();
-                    break;
-                case "3":
-                    AtenderPaciente();
-                    break;
-                case "4":
-                    AlterarDados();
-                    break;
-                case "q":
-                    Console.WriteLine("Saindo...");
-                    break;
-                default:
-                    Console.WriteLine("Opção inválida!");
-                    break;
-            }
-        }
         public void AlterarDados()
         {
-            Console.Write("Digite o novo nome do paciente: ");
-            nome = Console.ReadLine();
-            Console.Write("Digite o novo CPF do paciente: ");
-            cpf = Console.ReadLine();
-            Console.Write("Digite a nova idade do paciente: ");
-            idade = int.Parse(Console.ReadLine());
-            preferencial = idade >= 60;
-            Console.WriteLine("Dados alterados com sucesso!");
+            Console.WriteLine("Alterando dados do paciente...");
+            AdicionarDados();
         }
-        
+
         public void ListarPaciente()
         {
             Console.WriteLine("Nome: " + nome);
@@ -75,7 +36,21 @@ namespace filadeespera
             cpf = Console.ReadLine();
             Console.Write("Digite a idade do paciente: ");
             idade = int.Parse(Console.ReadLine());
-            preferencial = idade >= 60;
+            Console.Write("O paciente necessita de atendimento preferencial? (s/n): ");
+            string resposta = Console.ReadLine();
+            switch (resposta.ToLower())
+            {
+                case "s":
+                    preferencial = true;
+                    break;
+                case "n":
+                    preferencial = false;
+                    break;
+                default:
+                    Console.WriteLine("Opção inválida! Considerando como não preferencial.");
+                    preferencial = false;
+                    break;
+            }
             Console.WriteLine("Paciente adicionado com sucesso!");
         }
 
@@ -88,5 +63,24 @@ namespace filadeespera
             preferencial = false;
             Console.WriteLine("Paciente atendido com sucesso!");
         }
+        public void AdicionarDados()
+        {
+            Console.Write("Nome: ");
+            nome = Console.ReadLine();
+            Console.Write("CPF: ");
+            cpf = Console.ReadLine();
+            Console.Write("Idade: ");
+            idade = int.Parse(Console.ReadLine());
+            Console.Write("Preferencial? (s/n): ");
+            string resposta = Console.ReadLine();
+            preferencial = resposta.ToLower() == "s";
+        }
+
+        public void MostrarDados()
+        {
+            Console.WriteLine($"Nome: {nome}, CPF: {cpf}, Idade: {idade}, Preferencial: {(preferencial ? "Sim" : "Não")}");
+        }
+
+
     }
 }
