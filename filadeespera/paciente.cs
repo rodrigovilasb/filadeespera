@@ -19,7 +19,7 @@ namespace filadeespera
             AdicionarDados();
         }
 
-        public void ListarPaciente()
+        public void ListarPaciente() 
         {
             Console.WriteLine("Nome: " + nome);
             Console.WriteLine("CPF: " + cpf);
